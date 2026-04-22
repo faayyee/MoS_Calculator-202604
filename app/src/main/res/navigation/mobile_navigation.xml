@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_start">
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="com.example.moscalculator.ui.home.HomeFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_start"
+        android:name="com.example.moscalculator.ui.dashboard.DashboardFragment"
+        android:label="@string/title_start"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_information"
+        android:name="com.example.moscalculator.ui.notifications.NotificationsFragment"
+        android:label="@string/title_information"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_result"
+        android:name="com.example.moscalculator.ui.result.ResultFragment"
+        android:label="Result"
+        tools:layout="@layout/fragment_result" />
+
+</navigation>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="80dp">
+
+        <!-- 停止中 -->
+        <TextView
+            android:id="@+id/textStoppedStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:text="停止中"
+            android:textColor="@color/gray_400"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Timer -->
+        <TextView
+            android:id="@+id/timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="158dp"
+            android:text="00:00"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_measuring"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 計測開始 -->
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:text="@string/measure_start"
+            android:layout_marginTop="271dp"
+            android:background="@drawable/circle_button"
+            android:textColor="@color/gray_200"
+            android:textSize="22sp"
+            android:clipToOutline="true"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/editText_memo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 計測中 -->
+        <Button
+            android:id="@+id/button_measuring"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:text="@string/measure_ing"
+            android:layout_marginTop="271dp"
+            android:background="@drawable/circle_button_orange"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:clipToOutline="true"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_stop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 計測再開 -->
+        <Button
+            android:id="@+id/button_restart"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:text="@string/measure_restart"
+            android:layout_marginTop="271dp"
+            android:background="@drawable/circle_button_orange"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:clipToOutline="true"
+            android:gravity="center"
+            android:visibility="gone"
+            app:backgroundTint="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_showReport"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- メモ欄 -->
+        <EditText
+            android:id="@+id/editText_memo"
+            android:layout_width="221dp"
+            android:layout_height="100dp"
+            android:hint="@string/memo"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:textColorHint="@color/gray"
+            android:textColor="#000000"
+            android:layout_marginTop="46dp"
+            android:background="@drawable/edittext_rounded_border"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/button_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 計測停止 -->
+        <Button
+            android:id="@+id/button_stop"
+            android:layout_width="202dp"
+            android:layout_height="57dp"
+            android:text="@string/measure_stop_btn"
+            android:textSize="22sp"
+            android:backgroundTint="@color/red"
+            android:layout_marginTop="46dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/button_measuring"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 計測結果を見る -->
+        <Button
+            android:id="@+id/button_showReport"
+            android:layout_width="202dp"
+            android:layout_height="57dp"
+            android:text="@string/show_report"
+            android:textSize="22sp"
+            android:backgroundTint="@color/green"
+            android:layout_marginTop="46dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/button_restart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

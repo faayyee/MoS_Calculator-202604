@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MoS Calculator</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_history">記録</string>
+    <string name="title_start">計測</string>
+    <string name="title_information">マイページ</string>
+    <string name="measure_start">計測開始</string>
+    <string name="measure_restart">計測再開</string>
+    <string name="measure_stop_btn">計測停止</string>
+    <string name="measure_ing">計測中</string>
+    <string name="show_report">計測結果を見る</string>
+    <string name="memo">メモ</string>
+</resources>
