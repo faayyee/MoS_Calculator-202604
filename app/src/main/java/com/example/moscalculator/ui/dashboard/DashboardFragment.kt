@@ -59,18 +59,27 @@ class DashboardFragment : Fragment() {
     private var accelerometer: Sensor? = null
     private var gyroscope: Sensor? = null
     private val sensorDataList = mutableListOf<String>() // 用于保存六轴数据
+    private var measurementStartTimestampNs: Long? = null
     private val sharedViewModel: SharedSensorViewModel by activityViewModels()
     private val sensorEventListener = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent?) {
             event?.let {
-                val timestamp = System.currentTimeMillis()
+                if (measurementStartTimestampNs == null) {
+                    measurementStartTimestampNs = it.timestamp
+                }
+
+                val timeSec = (it.timestamp - measurementStartTimestampNs!!) / 1_000_000_000.0
                 val values = it.values
+
                 val data = when (it.sensor.type) {
-                    Sensor.TYPE_ACCELEROMETER -> "ACC,$timestamp,${values[0]},${values[1]},${values[2]}"
-                    Sensor.TYPE_GYROSCOPE -> "GYR,$timestamp,${values[0]},${values[1]},${values[2]}"
+                    Sensor.TYPE_ACCELEROMETER -> "ACC,$timeSec,${values[0]},${values[1]},${values[2]}"
+                    Sensor.TYPE_GYROSCOPE -> "GYR,$timeSec,${values[0]},${values[1]},${values[2]}"
                     else -> ""
                 }
-                if (data.isNotEmpty()) sensorDataList.add(data)
+
+                if (data.isNotEmpty()) {
+                    sensorDataList.add(data)
+                }
             }
         }
 
@@ -107,6 +116,7 @@ class DashboardFragment : Fragment() {
     //开始计时
     private fun startTimer() {
         seconds = 1
+        measurementStartTimestampNs = null
         binding.textStoppedStatus.clearAnimation()
         binding.textStoppedStatus.visibility = View.GONE
 

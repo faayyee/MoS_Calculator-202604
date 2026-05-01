@@ -224,44 +224,6 @@ class ResultFragment : Fragment() {
 
     //保存
     private fun exportSensorDataToCSV(context: Context, dataList: List<String>) {
-        val accX = mutableListOf<Float>()
-        val accY = mutableListOf<Float>()
-        val accZ = mutableListOf<Float>()
-
-        val gyrX = mutableListOf<Float>()
-        val gyrY = mutableListOf<Float>()
-        val gyrZ = mutableListOf<Float>()
-
-        // 分别提取 6轴数据
-        for (line in dataList) {
-            val parts = line.split(",")
-            if (parts.size != 5) continue
-            val type = parts[0]
-            val x = parts[2].toFloatOrNull() ?: continue
-            val y = parts[3].toFloatOrNull() ?: continue
-            val z = parts[4].toFloatOrNull() ?: continue
-
-            when (type) {
-                "ACC" -> {
-                    accX.add(x)
-                    accY.add(y)
-                    accZ.add(z)
-                }
-                "GYR" -> {
-                    gyrX.add(x)
-                    gyrY.add(y)
-                    gyrZ.add(z)
-                }
-            }
-        }
-
-        // 取最短长度，避免越界
-        val minSize = listOf(
-            accX.size, accY.size, accZ.size,
-            gyrX.size, gyrY.size, gyrZ.size
-        ).minOrNull() ?: 0
-
-        // 写入 CSV 文件内容
         // 1. 获取当前时间戳并格式化
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val fileName = "sensor_data_$timeStamp.csv"
@@ -270,17 +232,25 @@ class ResultFragment : Fragment() {
         val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val file = File(path, fileName)
 
-        val csvHeader = "accX,accY,accZ,gyrX,gyrY,gyrZ\n"
+        val csvHeader = "type,time_s,x,y,z\n"
         val csvBody = buildString {
-            for (i in 0 until minSize) {
-                append("${accX[i]},${accY[i]},${accZ[i]},${gyrX[i]},${gyrY[i]},${gyrZ[i]}\n")
+            for (line in dataList) {
+                val parts = line.split(",")
+                if (parts.size != 5) continue
+
+                val type = parts[0]
+                val timeSec = parts[1]
+                val x = parts[2]
+                val y = parts[3]
+                val z = parts[4]
+
+                append("$type,$timeSec,$x,$y,$z\n")
             }
         }
 
         val fullText = csvHeader + csvBody
 
         try {
-
             file.writeText(fullText)
 
             android.widget.Toast.makeText(
@@ -295,13 +265,6 @@ class ResultFragment : Fragment() {
             Log.e("CSV_EXPORT", "Error saving CSV: ${e.message}")
         }
     }
-
-
-
-
-
-
-
 
 
     override fun onCreateView(
